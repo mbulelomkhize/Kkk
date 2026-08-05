@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>UniGuide AI | University of Zululand</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<title>EduGuide AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -32,267 +25,257 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <div class="app">
 
-<!-- ==========================
-SIDEBAR
-========================== -->
+    <!-- ==========================
+            SIDEBAR
+    =========================== -->
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-<div class="logo">
+        <div class="logo">
 
-<i class="fa-solid fa-graduation-cap"></i>
+            <i class="fa-solid fa-graduation-cap"></i>
 
-<h2>EduGuide AI</h2>
+            <h2>UniGuide AI</h2>
 
-</div>
+        </div>
 
-<button class="new-chat">
+        <button class="new-chat">
 
-<i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus"></i>
 
-New Chat
+            New Chat
 
-</button>
+        </button>
 
-<div class="history-title">
+        <nav>
 
-Recent Conversations
+            <ul>
 
-</div>
+                <li class="active">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </li>
 
-<div class="history">
+                <li>
+                    <i class="fa-solid fa-comments"></i>
+                    Chat
+                </li>
 
-<div class="history-item">
+                <li>
+                    <i class="fa-solid fa-calculator"></i>
+                    APS Calculator
+                </li>
 
-<i class="fa-solid fa-comments"></i>
+                <li>
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Qualifications
+                </li>
 
-Computer Science
+                <li>
+                    <i class="fa-solid fa-building-columns"></i>
+                    Faculties
+                </li>
 
-</div>
+                <li>
+                    <i class="fa-solid fa-heart"></i>
+                    Career Quiz
+                </li>
 
-<div class="history-item">
+                <li>
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </li>
 
-<i class="fa-solid fa-comments"></i>
+                <li>
+                    <i class="fa-solid fa-bookmark"></i>
+                    Saved
+                </li>
 
-APS Calculation
+                <li>
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </li>
 
-</div>
+            </ul>
 
-<div class="history-item">
+        </nav>
 
-<i class="fa-solid fa-comments"></i>
+        <div class="sidebar-footer">
 
-Medicine
+            <button id="themeBtn">
 
-</div>
+                🌙 Dark Mode
 
-<div class="history-item">
+            </button>
 
-<i class="fa-solid fa-comments"></i>
+        </div>
 
-Engineering
+    </aside>
 
-</div>
+    <!-- ==========================
+            MAIN CONTENT
+    =========================== -->
 
-</div>
+    <main class="content">
 
-<div class="sidebar-footer">
+        <!-- HEADER -->
 
-<button>
+        <header>
 
-🌙 Dark Mode
+            <div>
 
-</button>
+                <h1>
 
-<button>
+                    UniGuide AI
 
-🌐 English
+                </h1>
 
-</button>
+                <p>
 
-</div>
+                    Intelligent Qualification Recommendation System for the University of Zululand
 
-</aside>
+                </p>
 
-<!-- ==========================
-MAIN CONTENT
-========================== -->
+            </div>
 
-<main class="main">
+            <div class="header-buttons">
 
-<header>
+                <button id="downloadReport">
 
-<div>
+                    <i class="fa-solid fa-file-arrow-down"></i>
 
-<h1>
+                    Report
 
-EduGuide AI
+                </button>
 
-</h1>
+                <button id="clearChat">
 
-<p>
+                    <i class="fa-solid fa-trash"></i>
 
-Your Intelligent University &
-Career Recommendation Assistant
+                    Clear
 
-</p>
+                </button>
 
-</div>
+            </div>
 
-<div class="header-buttons">
+        </header>
 
-<button>
+        <!-- QUICK ACTIONS -->
 
-<i class="fa-solid fa-download"></i>
+        <section class="quick-actions">
 
-Export Chat
+            <button>🧮 Calculate APS</button>
 
-</button>
+            <button>🎓 Recommend Qualification</button>
 
-<button>
+            <button>🏛 Explore Faculties</button>
 
-<i class="fa-solid fa-trash"></i>
+            <button>❤️ Career Quiz</button>
 
-Clear
+            <button>📚 Admission Requirements</button>
 
-</button>
+        </section>
 
-</div>
+        <!-- CHAT WINDOW -->
 
-</header>
+        <section class="chat-area" id="chatArea">
 
-<!-- ==========================
-SUGGESTIONS
-========================== -->
+            <div class="bot-message">
 
-<section class="suggestions">
+                <div class="bot-avatar">
 
-<button>
+                    🤖
 
-🎓 Recommend a Qualification
+                </div>
 
-</button>
+                <div class="message">
 
-<button>
+                    <h3>
 
-🧮 Calculate APS
+                        Welcome to UniGuide AI
 
-</button>
+                    </h3>
 
-<button>
+                    <p>
 
-🏫 Universities
+                        Hello 👋
 
-</button>
+                    </p>
 
-<button>
+                    <p>
 
-💻 IT Careers
+                        I am your University of Zululand assistant.
 
-</button>
+                    </p>
 
-<button>
+                    <p>
 
-❤️ Healthcare
+                        I can help you:
 
-</button>
+                    </p>
 
-<button>
+                    <ul>
 
-⚙ Engineering
+                        <li>Calculate your APS</li>
 
-</button>
+                        <li>Recommend qualifications</li>
 
-</section>
+                        <li>Check admission requirements</li>
 
-<!-- ==========================
-CHAT AREA
-========================== -->
+                        <li>Explore UniZulu faculties</li>
 
-<section class="chat-container">
+                        <li>Suggest careers</li>
 
-<div class="bot-message">
+                        <li>Guide your qualification choices</li>
 
-<div class="avatar">
+                    </ul>
 
-🤖
+                    <p>
 
-</div>
+                        What would you like to do today?
 
-<div class="message">
+                    </p>
 
-<h3>
+                </div>
 
-EduGuide AI
+            </div>
 
-</h3>
+        </section>
 
-<p>
+        <!-- INPUT -->
 
-Hello 👋
+        <section class="chat-input">
 
-I'm your intelligent university assistant.
+            <button id="voiceBtn">
 
-I can:
+                <i class="fa-solid fa-microphone"></i>
 
-✅ Calculate APS
+            </button>
 
-✅ Recommend qualifications
+            <input
+            type="text"
+            id="userInput"
+            placeholder="Ask something about UniZulu...">
 
-✅ Compare universities
+            <button id="speakBtn">
 
-✅ Help choose careers
+                <i class="fa-solid fa-volume-high"></i>
 
-✅ Explain admission requirements
+            </button>
 
-What would you like to do today?
+            <button id="sendBtn">
 
-</p>
+                <i class="fa-solid fa-paper-plane"></i>
 
-</div>
+            </button>
 
-</div>
+        </section>
 
-</section>
-
-<!-- ==========================
-CHAT INPUT
-========================== -->
-
-<div class="chat-input">
-
-<button>
-
-🎤
-
-</button>
-
-<input
-
-type="text"
-
-placeholder="Ask me anything about university...">
-
-<button>
-
-🔊
-
-</button>
-
-<button class="send">
-
-<i class="fa-solid fa-paper-plane"></i>
-
-</button>
-
-</div>
-
-</main>
+    </main>
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
