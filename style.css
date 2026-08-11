@@ -5,20 +5,32 @@
 
 :root{
 --primary:#003B7A;
+--primary-dark:#00284f;
 --secondary:#FDB913;
 --background:#F4F7FB;
 --card:#FFFFFF;
 --text:#1F2937;
+--text-muted:#64748B;
 --border:#D9E2EC;
---shadow:0 10px 30px rgba(0,0,0,.08);
+--shadow-sm:0 2px 8px rgba(15,23,42,.06);
+--shadow:0 10px 30px rgba(15,23,42,.07);
+--shadow-lg:0 18px 45px rgba(15,23,42,.12);
+--radius-sm:10px;
+--radius:16px;
+--radius-lg:20px;
+--watermark-opacity:0.05;
 }
 
 body.dark{
---background:#0F172A;
---card:#1E293B;
+--background:#0B1220;
+--card:#161F31;
 --text:#E5E7EB;
---border:#334155;
+--text-muted:#94A3B8;
+--border:#293548;
+--shadow-sm:0 2px 8px rgba(0,0,0,.25);
 --shadow:0 10px 30px rgba(0,0,0,.35);
+--shadow-lg:0 18px 45px rgba(0,0,0,.5);
+--watermark-opacity:0.07;
 }
 
 *{
@@ -34,6 +46,7 @@ color:var(--text);
 height:100vh;
 overflow:hidden;
 transition:background .3s, color .3s;
+-webkit-font-smoothing:antialiased;
 }
 
 .app{
@@ -60,15 +73,19 @@ display:flex;
 align-items:center;
 gap:12px;
 margin-bottom:35px;
+padding-bottom:22px;
+border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 .logo i{
-font-size:38px;
+font-size:34px;
 color:var(--secondary);
 }
 
 .logo h2{
-font-size:28px;
+font-size:24px;
+font-weight:600;
+letter-spacing:.3px;
 }
 
 .new-chat{
@@ -94,23 +111,35 @@ gap:10px;
 }
 
 .sidebar li{
-padding:14px;
-border-radius:12px;
+padding:13px 14px;
+border-radius:10px;
 cursor:pointer;
 display:flex;
 align-items:center;
 gap:15px;
-transition:.3s;
+font-size:14.5px;
+font-weight:500;
+letter-spacing:.2px;
+color:rgba(255,255,255,.85);
+transition:.2s;
+}
+
+.sidebar li i{
+width:18px;
+text-align:center;
+font-size:15px;
 }
 
 .sidebar li:hover{
-background:rgba(255,255,255,.15);
+background:rgba(255,255,255,.1);
+color:white;
 }
 
 .sidebar li.active{
 background:white;
 color:var(--primary);
 font-weight:600;
+box-shadow:var(--shadow-sm);
 }
 
 .sidebar-footer{
@@ -136,26 +165,55 @@ display:flex;
 flex-direction:column;
 background:var(--background);
 overflow:hidden;
+position:relative;
+}
+
+/* UniZulu logo watermark.
+   Add the official logo file to your repo at: assets/unizulu-logo.png
+   (transparent-background PNG or SVG works best). This sits behind
+   all content and never intercepts clicks. */
+.content::before{
+content:"";
+position:absolute;
+inset:0;
+background-image:url('assets/unizulu-logo.png');
+background-repeat:no-repeat;
+background-position:center 45%;
+background-size:min(45vw, 520px);
+opacity:var(--watermark-opacity);
+pointer-events:none;
+z-index:0;
+}
+
+.content > *{
+position:relative;
+z-index:1;
 }
 
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 35px;
+padding:22px 40px;
 background:var(--card);
-box-shadow:var(--shadow);
+box-shadow:var(--shadow-sm);
+border-bottom:1px solid var(--border);
 flex-shrink:0;
+position:relative;
+z-index:1;
 }
 
 header h1{
-font-size:34px;
+font-size:26px;
+font-weight:600;
 color:var(--primary);
+letter-spacing:.2px;
 }
 
 header p{
-color:#6b7280;
-margin-top:5px;
+color:var(--text-muted);
+margin-top:4px;
+font-size:14px;
 }
 
 .header-buttons{
@@ -164,18 +222,33 @@ gap:15px;
 }
 
 .header-buttons button{
-padding:12px 20px;
+padding:11px 18px;
 border:none;
-border-radius:12px;
+border-radius:var(--radius-sm);
 cursor:pointer;
 font-weight:600;
+font-size:13.5px;
 background:var(--primary);
 color:white;
-transition:.3s;
+transition:.2s;
+box-shadow:var(--shadow-sm);
 }
 
 .header-buttons button:hover{
 transform:translateY(-2px);
+box-shadow:var(--shadow);
+}
+
+#clearChat{
+background:transparent;
+color:var(--text-muted);
+border:1px solid var(--border);
+box-shadow:none;
+}
+
+#clearChat:hover{
+color:#dc2626;
+border-color:#dc2626;
 }
 
 /* ===========================
@@ -216,20 +289,23 @@ flex-wrap:wrap;
 
 .quick-actions button{
 background:var(--card);
-border:none;
-padding:15px 20px;
-border-radius:15px;
-box-shadow:var(--shadow);
+border:1px solid var(--border);
+padding:13px 18px;
+border-radius:var(--radius);
+box-shadow:var(--shadow-sm);
 cursor:pointer;
-font-weight:600;
-transition:.3s;
+font-weight:500;
+font-size:14px;
+transition:.2s;
 color:var(--text);
 }
 
 .quick-actions button:hover{
 background:var(--secondary);
+border-color:var(--secondary);
 color:#1F2937;
-transform:translateY(-3px);
+transform:translateY(-2px);
+box-shadow:var(--shadow);
 }
 
 /* =====================================
@@ -419,10 +495,11 @@ gap:25px;
 
 .card{
 background:var(--card);
-border-radius:18px;
-padding:25px;
-box-shadow:var(--shadow);
-transition:.3s;
+border:1px solid var(--border);
+border-radius:var(--radius-lg);
+padding:26px 28px;
+box-shadow:var(--shadow-sm);
+transition:.25s;
 position:relative;
 overflow:hidden;
 margin:20px 30px;
@@ -433,7 +510,8 @@ margin-top:30px;
 }
 
 .card:hover{
-transform:translateY(-4px);
+box-shadow:var(--shadow);
+transform:translateY(-3px);
 }
 
 .card::before{
@@ -441,19 +519,22 @@ content:"";
 position:absolute;
 top:0; left:0;
 width:100%;
-height:6px;
+height:4px;
 background:linear-gradient(90deg, var(--primary), var(--secondary));
 }
 
 .card h2{
 color:var(--primary);
-margin-bottom:15px;
-font-size:22px;
+margin-bottom:14px;
+font-size:19px;
+font-weight:600;
+letter-spacing:.2px;
 }
 
 .card p{
-line-height:1.8;
-color:#6b7280;
+line-height:1.75;
+color:var(--text-muted);
+font-size:14.5px;
 }
 
 /* =====================================
@@ -506,31 +587,35 @@ margin-top:15px;
 }
 
 .course-card{
-background:var(--background);
+background:var(--card);
 border:1px solid var(--border);
-border-radius:18px;
+border-radius:var(--radius);
 padding:20px;
 display:flex;
 flex-direction:column;
 gap:12px;
-transition:.3s;
+transition:.25s;
+box-shadow:var(--shadow-sm);
 }
 
 .course-card:hover{
-transform:translateY(-6px);
+transform:translateY(-4px);
+box-shadow:var(--shadow);
 }
 
 .course-title{
-font-size:20px;
+font-size:17px;
 font-weight:600;
 color:var(--primary);
+letter-spacing:.1px;
 }
 
 .course-info{
 display:flex;
 justify-content:space-between;
-font-size:14px;
-color:#6b7280;
+font-size:13px;
+color:var(--text-muted);
+font-weight:500;
 }
 
 .course-tags{
@@ -540,12 +625,18 @@ gap:10px;
 }
 
 .tag{
-padding:8px 14px;
+padding:6px 13px;
 border-radius:30px;
-background:#e9f1fb;
+background:rgba(0,59,122,.08);
 color:var(--primary);
-font-size:13px;
+font-size:12px;
 font-weight:600;
+letter-spacing:.2px;
+}
+
+body.dark .tag{
+background:rgba(253,185,19,.12);
+color:var(--secondary);
 }
 
 .course-card-buttons{
@@ -556,29 +647,31 @@ margin-top:5px;
 
 .apply-btn{
 flex:1;
-padding:12px;
+padding:11px;
 border:none;
-border-radius:12px;
+border-radius:var(--radius-sm);
 background:var(--primary);
 color:white;
 cursor:pointer;
 font-weight:600;
-transition:.3s;
+font-size:13.5px;
+transition:.2s;
 }
 
 .apply-btn:hover{
-background:#002e5d;
+background:var(--primary-dark);
 }
 
 .save-btn{
-padding:12px 16px;
-border:2px solid var(--primary);
-border-radius:12px;
+padding:11px 15px;
+border:1.5px solid var(--primary);
+border-radius:var(--radius-sm);
 background:transparent;
 color:var(--primary);
 cursor:pointer;
 font-weight:600;
-transition:.3s;
+font-size:13.5px;
+transition:.2s;
 }
 
 .save-btn:hover{
@@ -618,10 +711,13 @@ background:var(--secondary);
 
 .step{
 position:relative;
-background:var(--background);
-padding:15px 20px;
-border-radius:12px;
-box-shadow:var(--shadow);
+background:var(--card);
+border:1px solid var(--border);
+padding:14px 20px;
+border-radius:var(--radius-sm);
+box-shadow:var(--shadow-sm);
+font-size:14.5px;
+font-weight:500;
 }
 
 .step::before{
@@ -646,24 +742,31 @@ margin-top:20px;
 
 .faculty{
 padding:18px;
-background:var(--background);
+background:var(--card);
 border:1px solid var(--border);
-border-radius:15px;
+border-radius:var(--radius);
 text-align:center;
 font-weight:600;
+font-size:14px;
 cursor:pointer;
-transition:.3s;
+transition:.2s;
+box-shadow:var(--shadow-sm);
 }
 
 .faculty:hover{
 background:var(--secondary);
 color:#1F2937;
-transform:translateY(-5px);
+transform:translateY(-4px);
+box-shadow:var(--shadow);
 }
 
 .faculty small{
 font-weight:400;
-color:#6b7280;
+color:var(--text-muted);
+}
+
+.faculty:hover small{
+color:#1F2937;
 }
 
 /* =====================================
@@ -679,21 +782,32 @@ margin:30px;
 
 .stat-box{
 background:var(--card);
-padding:20px;
-border-radius:16px;
+border:1px solid var(--border);
+padding:22px;
+border-radius:var(--radius);
 text-align:center;
+box-shadow:var(--shadow-sm);
+transition:.2s;
+}
+
+.stat-box:hover{
 box-shadow:var(--shadow);
+transform:translateY(-3px);
 }
 
 .stat-box h3{
-font-size:34px;
+font-size:30px;
+font-weight:700;
 color:var(--primary);
-margin-bottom:10px;
+margin-bottom:6px;
 }
 
 .stat-box span{
-color:#6b7280;
+color:var(--text-muted);
 font-weight:500;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:.4px;
 }
 
 /* =====================================
