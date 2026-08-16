@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UniGuide AI — an intelligent APS calculator and qualification recommendation assistant for the University of Zululand.">
+    <meta name="theme-color" content="#003B7A">
+
+    <title>UniGuide AI | University of Zululand</title>
+
+    <link rel="icon" type="image/png" href="assets/unizulu-logo.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ==========================
+     AUTH SCREEN
+=========================== -->
+<div class="auth-screen" id="authScreen">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h2>UniGuide AI</h2>
+        </div>
+        <p class="auth-subtitle">University of Zululand qualification assistant</p>
+
+        <div class="auth-tabs">
+            <button id="tabLogin" class="auth-tab active">Log In</button>
+            <button id="tabSignup" class="auth-tab">Sign Up</button>
+        </div>
+
+        <div class="auth-error" id="authError"></div>
+
+        <form id="loginForm" class="auth-form active">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" autocomplete="username" required>
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" autocomplete="current-password" required>
+
+            <button type="submit" class="apply-btn auth-submit">Log In</button>
+        </form>
+
+        <form id="signupForm" class="auth-form">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" autocomplete="name" required>
+
+            <label for="signupUsername">Username</label>
+            <input type="text" id="signupUsername" autocomplete="username" required>
+
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" autocomplete="new-password" minlength="6" required>
+
+            <button type="submit" class="apply-btn auth-submit">Create Account</button>
+        </form>
+
+        <p class="auth-note">Account data is stored only in this browser — not on a server.</p>
+    </div>
+</div>
+
+<div class="app">
+
+    <!-- ==========================
+            SIDEBAR
+    =========================== -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h2>UniGuide AI</h2>
+        </div>
+
+        <button class="new-chat" id="newChatBtn">
+            <i class="fa-solid fa-plus"></i>
+            New Chat
+        </button>
+
+        <nav>
+            <ul>
+                <li class="active" data-page="home"><i class="fa-solid fa-house"></i> Home</li>
+                <li data-page="chat"><i class="fa-solid fa-comments"></i> Chat</li>
+                <li data-page="aps"><i class="fa-solid fa-calculator"></i> APS Calculator</li>
+                <li data-page="qualifications"><i class="fa-solid fa-graduation-cap"></i> Qualifications</li>
+                <li data-page="faculties"><i class="fa-solid fa-building-columns"></i> Faculties</li>
+                <li data-page="quiz"><i class="fa-solid fa-heart"></i> Career Quiz</li>
+                <li data-page="dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+                <li data-page="saved"><i class="fa-solid fa-bookmark"></i> Saved</li>
+                <li data-page="settings"><i class="fa-solid fa-gear"></i> Settings</li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="current-user">
+                <i class="fa-solid fa-circle-user"></i>
+                <span id="currentUserName">—</span>
+            </div>
+            <button id="themeBtn">🌙 Dark Mode</button>
+            <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+        </div>
+
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ==========================
+            MAIN CONTENT
+    =========================== -->
+    <main class="content">
+
+        <header>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+            <div>
+                <h1>UniGuide AI</h1>
+                <p>Intelligent Qualification Recommendation System for the University of Zululand</p>
+            </div>
+            <div class="header-buttons">
+                <button id="downloadReport"><i class="fa-solid fa-file-arrow-down"></i> Report</button>
+                <button id="clearChat"><i class="fa-solid fa-trash"></i> Clear</button>
+            </div>
+        </header>
+
+        <div class="pages">
+
+            <!-- ==========================
+                 HOME
+            =========================== -->
+            <section class="page active" id="page-home">
+
+                <section class="quick-actions">
+                    <button data-goto="aps">🧮 Calculate APS</button>
+                    <button data-goto="qualifications">🎓 Recommend Qualification</button>
+                    <button data-goto="faculties">🏛 Explore Faculties</button>
+                    <button data-goto="quiz">❤️ Career Quiz</button>
+                    <button data-goto="qualifications">📚 Admission Requirements</button>
+                </section>
+
+                <section class="dashboard">
+
+                    <div class="card">
+                        <h2>APS Score</h2>
+                        <div class="aps-score" id="homeApsScore">--</div>
+                        <div class="aps-label">Your calculated APS will appear here.</div>
+                        <div class="progress"><div class="progress-fill" id="homeApsFill" style="width:0%"></div></div>
+                    </div>
+
+                    <div class="card">
+                        <h2>Recommended Qualification</h2>
+                        <div id="homeRecommendation">
+                            <div class="course-card">
+                                <div class="course-title">BSc (Computer Science &amp; Mathematics)</div>
+                                <div class="course-info"><span>APS: 28</span><span>3 Years</span></div>
+                                <div class="combination-line"><i class="fa-solid fa-layer-group"></i> Computer Science &amp; Mathematics</div>
+                                <div class="course-tags">
+                                    <div class="tag">Science</div>
+                                </div>
+                                <button class="apply-btn" data-goto="qualifications">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2>Career Match</h2>
+                        <h1>95%</h1>
+                        <p>Excellent match for analytical and problem-solving careers.</p>
+                        <div class="progress"><div class="progress-fill" style="width:95%"></div></div>
+                    </div>
+
+                </section>
+
+                <section class="dashboard">
+                    <div class="card">
+                        <h2>Explore Faculties</h2>
+                        <div class="faculties" id="homeFacultiesPreview">
+                            <div class="faculty">Science, Agriculture &amp; Engineering</div>
+                            <div class="faculty">Commerce, Administration &amp; Law</div>
+                            <div class="faculty">Education</div>
+                            <div class="faculty">Humanities &amp; Social Sciences</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard">
+                    <div class="card">
+                        <h2>Career Roadmap</h2>
+                        <div class="roadmap">
+                            <div class="step">Grade 12</div>
+                            <div class="step">Apply to UniZulu</div>
+                            <div class="step">Complete Your Degree</div>
+                            <div class="step">Internship</div>
+                            <div class="step">Graduate Employment</div>
+                            <div class="step">Professional Career</div>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <!-- ==========================
+                 CHAT
+            =========================== -->
+            <section class="page" id="page-chat">
+                <section class="chat-area" id="chatArea">
+                    <div class="bot-message">
+                        <div class="bot-avatar">🤖</div>
+                        <div class="message">
+                            <h3>Welcome to UniGuide AI</h3>
+                            <p>Hello 👋</p>
+                            <p>I am your University of Zululand assistant.</p>
+                            <p>I can help you:</p>
+                            <ul>
+                                <li>Calculate your APS</li>
+                                <li>Recommend qualifications</li>
+                                <li>Check admission requirements</li>
+                                <li>Explore UniZulu faculties</li>
+                                <li>Suggest careers</li>
+                                <li>Guide your qualification choices</li>
+                            </ul>
+                            <p>What would you like to do today?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="chat-input">
+                    <button id="voiceBtn" title="Voice input" aria-label="Voice input"><i class="fa-solid fa-microphone"></i></button>
+                    <input type="text" id="userInput" placeholder="Ask something about UniZulu..." aria-label="Message">
+                    <button id="speakBtn" title="Read last reply aloud" aria-label="Read last reply aloud"><i class="fa-solid fa-volume-high"></i></button>
+                    <button id="sendBtn" title="Send" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+                </section>
+            </section>
+
+            <!-- ==========================
+                 APS CALCULATOR
+            =========================== -->
+            <section class="page" id="page-aps">
+                <div class="card">
+                    <h2>APS Calculator</h2>
+                    <p>Enter your percentage mark for your best 6 subjects (Life Orientation is excluded from the official calculation). We'll convert each to a point score out of 8 and add them up.</p>
+                    <p style="font-size:12.5px;color:var(--text-muted);margin-top:-8px;">Based on the APS scale published in UniZulu's 2026 faculty handbooks. Confirm exact figures with the official prospectus before applying.</p>
+
+                    <form id="apsForm">
+                        <div id="apsRows" class="aps-rows"></div>
+                        <div class="aps-form-buttons">
+                            <button type="button" id="addApsRow" class="secondary-btn">+ Add Subject</button>
+                            <button type="submit" class="apply-btn">Calculate APS</button>
+                        </div>
+                    </form>
+
+                    <div id="apsResult" class="aps-result"></div>
+                </div>
+
+                <div class="card">
+                    <h2>Matching Qualifications</h2>
+                    <div class="course-grid" id="apsMatches">
+                        <p>Calculate your APS above to see qualifications you qualify for.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 QUALIFICATIONS
+            =========================== -->
+            <section class="page" id="page-qualifications">
+                <div class="card">
+                    <h2>All Qualifications</h2>
+                    <div class="course-grid" id="qualificationsList"></div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 FACULTIES
+            =========================== -->
+            <section class="page" id="page-faculties">
+                <div class="card">
+                    <h2>Explore Faculties</h2>
+                    <p>Select a faculty to see its qualifications.</p>
+                    <div class="faculties" id="facultiesList"></div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 CAREER QUIZ
+            =========================== -->
+            <section class="page" id="page-quiz">
+                <div class="card">
+                    <h2>Career Quiz</h2>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 DASHBOARD
+            =========================== -->
+            <section class="page" id="page-dashboard">
+                <div class="stats">
+                    <div class="stat-box"><h3 id="dashChats">0</h3><span>Chats</span></div>
+                    <div class="stat-box"><h3 id="dashAps">0</h3><span>APS Calculations</span></div>
+                    <div class="stat-box"><h3 id="dashRecs">0</h3><span>Recommendations</span></div>
+                    <div class="stat-box"><h3 id="dashSaved">0</h3><span>Saved Courses</span></div>
+                </div>
+                <div class="card">
+                    <h2>Latest APS Score</h2>
+                    <div class="aps-score" id="dashLastAps">--</div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 SAVED
+            =========================== -->
+            <section class="page" id="page-saved">
+                <div class="card">
+                    <h2>Saved Courses</h2>
+                    <div class="course-grid" id="savedList"></div>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 SETTINGS
+            =========================== -->
+            <section class="page" id="page-settings">
+                <div class="card">
+                    <h2>Settings</h2>
+                    <p>UniGuide AI stores your APS history, saved courses, and stats locally in this browser only — nothing is sent to a server.</p>
+                    <button id="resetData" class="secondary-btn danger">Reset All Data</button>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ==========================
+     QUALIFICATION DETAIL MODAL
+=========================== -->
+<div class="modal" id="detailModal">
+    <div class="modal-content">
+        <button class="modal-close" id="detailModalClose" aria-label="Close">&times;</button>
+        <div id="detailModalBody"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
